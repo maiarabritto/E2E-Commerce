@@ -1,0 +1,103 @@
+# Projeto Front-End: Gestão de Usuários e Produtos
+## Objetivo:
+Criar uma interface web responsiva, profissional e intuitiva para dois módulos distintos:
+- Gestão de Usuários
+- Gestão de Produtos
+
+Utilizar **apenas HTML, CSS e JS** (sem frameworks ou bibliotecas externas). O foco é a **interface**: componentes, validações visuais, interações, mensagens, modais, responsividade.
+
+---
+
+## MÓDULO 1: GESTÃO DE USUÁRIOS
+
+### 🎯 Funcionalidades:
+- Cadastro de novo usuário
+- Login de usuário
+- Edição dos próprios dados (clientes e vendedores)
+- Exclusão de conta com confirmação
+- Interface diferenciada por perfil (cliente / vendedor / admin)
+
+### 📋 Campos do formulário de cadastro:
+- Nome completo *(obrigatório)*
+- E-mail *(obrigatório, único)*
+- Senha *(mínimo 10 caracteres, deve conter letras, números e caracteres especiais)*
+- Perfil *(select: Cliente, Vendedor)*
+
+### ✅ Regras de validação (JS):
+- E-mail não pode repetir (simular com localStorage ou array)
+- Senha deve ter:
+  - Mínimo 10 caracteres
+  - Pelo menos uma letra, um número e um caractere especial
+- Exibir mensagens de erro se houver falha de validação
+- Após login, redirecionar para:
+  - **Cliente:** tela de navegação/compra fictícia
+  - **Vendedor:** tela com pedidos e clientes (simulada)
+  - **Administrador (mock):** tela com lista e edição de todos usuários
+
+### 🔒 Segurança (Front):
+- Armazenar senha com `btoa()` (base64) para simular criptografia (não é segura, mas serve para simulação)
+- Implementar logout automático após 30min de inatividade com `setTimeout`
+
+### ⚙️ Funcionalidades adicionais:
+- Botão de logout visível após login
+- Tela de login com validação imediata (e-mail/senha incorretos)
+- Responsivo em dispositivos móveis
+
+---
+
+## MÓDULO 2: GESTÃO DE PRODUTOS
+
+### 🎯 Funcionalidades:
+- Listagem paginada de produtos (simular 10+ produtos em JSON/localStorage)
+- Busca por nome
+- Filtro por categoria
+- Ordenação por preço e estoque
+- Detalhamento de produto
+- Aumento de estoque em lotes de 10, 20, 30...
+
+### 📋 Exibição na lista:
+- Nome
+- Categoria
+- Preço
+- Estoque atual
+- Imagem (simulada via `<img src>` com base na categoria)
+
+### ➕ Aumentar estoque:
+- Botão "Adicionar ao Estoque" com seletor de lote (dropdown 10, 20, 30…)
+- Exibir modal de confirmação antes de aplicar
+- Validar:
+  - Valor deve ser múltiplo de 10 (mensagem de erro se não for)
+  - Produto inativo → impedir alteração com mensagem
+  - Se limite máximo de estoque for atingido → impedir com aviso
+  - Após sucesso → mostrar “Estoque atualizado com sucesso” com novo valor
+  - Em caso de falha (simular com probabilidade ou botão), mostrar “Falha ao atualizar. Tente novamente.”
+
+### ❌ Fora do escopo:
+- Não permitir criação, edição ou exclusão de produtos
+- Não permitir redução de estoque
+
+### ✅ Responsividade:
+- Grid de produtos adaptável a telas pequenas
+- Modal centralizado e com foco automático
+- Ações com feedback visual (spinners, mensagens de sucesso/erro)
+
+---
+
+## 🧪 Simulação de Dados
+Usar `localStorage` para armazenar temporariamente:
+- Usuários cadastrados (com ID, nome, e-mail, senha, perfil)
+- Lista de produtos (pré-carregada em JS com categoria, nome, preço, estoque, status ativo/inativo)
+
+---
+
+## 🧠 Sugestões visuais:
+- Cores:
+  - Azul ou verde para ações positivas
+  - Vermelho para erros ou exclusão
+- Ícones (usando emoji ou SVG inline): 🗑️ ✏️ ✅ ❌ 🔒
+- Fontes simples (Google Fonts opcional: **Roboto**, **Inter** ou **Open Sans**)
+- Mobile-first layout com media queries
+
+---
+
+## 📁 Organização de Arquivos:

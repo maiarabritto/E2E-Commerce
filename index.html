@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2E-Commerce - Gestão de Usuários e Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🛒 E2E-Commerce</h1>
+            </div>
+            <nav class="nav">
+                <button id="loginBtn" class="btn btn-primary">Login</button>
+                <button id="logoutBtn" class="btn btn-secondary" style="display: none;">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section id="welcomeSection" class="welcome-section">
+                <h2>Bem-vindo ao E2E-Commerce</h2>
+                <p>Sistema de gestão de usuários e produtos</p>
+                <div class="action-buttons">
+                    <button id="showUserManagement" class="btn btn-primary">Gestão de Usuários</button>
+                    <button id="showProductManagement" class="btn btn-primary">Gestão de Produtos</button>
+                </div>
+            </section>
+
+            <!-- Login Modal -->
+            <div id="loginModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Login</h3>
+                        <span class="close" id="closeLoginModal">&times;</span>
+                    </div>
+                    <form id="loginForm" class="form">
+                        <div class="form-group">
+                            <label for="loginEmail">E-mail:</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Senha:</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </form>
+                    <p class="form-link">
+                        Não tem conta? <a href="#" id="showRegister">Cadastre-se aqui</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Register Modal -->
+            <div id="registerModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Cadastro de Usuário</h3>
+                        <span class="close" id="closeRegisterModal">&times;</span>
+                    </div>
+                    <form id="registerForm" class="form">
+                        <div class="form-group">
+                            <label for="registerName">Nome Completo:</label>
+                            <input type="text" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">E-mail:</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Senha:</label>
+                            <input type="password" id="registerPassword" required>
+                            <small class="password-hint">Mínimo 10 caracteres com letras, números e caracteres especiais</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerProfile">Perfil:</label>
+                            <select id="registerProfile" required>
+                                <option value="">Selecione um perfil</option>
+                                <option value="cliente">Cliente</option>
+                                <option value="vendedor">Vendedor</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    </form>
+                    <p class="form-link">
+                        Já tem conta? <a href="#" id="showLogin">Faça login aqui</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- User Management Section -->
+            <section id="userManagementSection" class="management-section" style="display: none;">
+                <div class="section-header">
+                    <h2>👥 Gestão de Usuários</h2>
+                    <button id="addUserBtn" class="btn btn-primary">Novo Usuário</button>
+                </div>
+                <div class="user-list" id="userList">
+                    <!-- Users will be dynamically loaded here -->
+                </div>
+            </section>
+
+            <!-- Product Management Section -->
+            <section id="productManagementSection" class="management-section" style="display: none;">
+                <div class="section-header">
+                    <h2>📦 Gestão de Produtos</h2>
+                </div>
+                
+                <!-- Search and Filters -->
+                <div class="filters">
+                    <div class="search-box">
+                        <input type="text" id="productSearch" placeholder="Buscar por nome do produto...">
+                        <button id="searchBtn" class="btn btn-secondary">🔍</button>
+                    </div>
+                    <div class="filter-group">
+                        <select id="categoryFilter">
+                            <option value="">Todas as categorias</option>
+                            <option value="eletrônicos">Eletrônicos</option>
+                            <option value="roupas">Roupas</option>
+                            <option value="casa">Casa</option>
+                            <option value="livros">Livros</option>
+                            <option value="esportes">Esportes</option>
+                        </select>
+                        <select id="sortBy">
+                            <option value="name">Ordenar por nome</option>
+                            <option value="price">Ordenar por preço</option>
+                            <option value="stock">Ordenar por estoque</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="product-grid" id="productGrid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- User Dashboard (after login) -->
+            <section id="userDashboard" class="dashboard" style="display: none;">
+                <h2 id="dashboardTitle">Dashboard</h2>
+                <div id="dashboardContent">
+                    <!-- Content will be loaded based on user profile -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirmar Ação</h3>
+                <span class="close" id="closeConfirmModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Tem certeza que deseja realizar esta ação?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-secondary">Cancelar</button>
+                <button id="confirmOk" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
